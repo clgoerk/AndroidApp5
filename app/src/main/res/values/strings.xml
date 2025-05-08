@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AndroidApp5</string>
+    <string name="video_details">Video Details</string>
+    <string name="what_s_trending">What\'s Trending</string>
+    <string name="search_music_videos">Search music videos...</string>
+    <string name="go">Go</string>
+    <string name="view_playlist">View Playlist</string>
+    <string name="my_playlist">My Playlist</string>
+    <string name="play_all">Play All</string>
+    <string name="video_title">Video Title</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="search_results">Search Results</string>
+    <string name="thumbnail">Thumbnail</string>
+</resources>
