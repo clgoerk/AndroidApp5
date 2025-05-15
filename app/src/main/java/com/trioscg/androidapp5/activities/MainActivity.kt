@@ -6,6 +6,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +29,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchInput: EditText
     private lateinit var searchButton: Button
     private val apiKey = "AIzaSyD01YGdmpOADhEGsXYZbH_07g15tqXxDuY"
-    private val playlistName = "playlist" // ✅ Consistent playlist name
+
+    private var videoToAdd: VideoItem? = null
+    private lateinit var playlistLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,12 +47,23 @@ class MainActivity : AppCompatActivity() {
 
         val viewPlaylistButton = findViewById<Button>(R.id.viewPlaylistButton)
         viewPlaylistButton.setOnClickListener {
-            val intent = Intent(this, PlaylistActivity::class.java)
+            val intent = Intent(this, AllPlaylistsActivity::class.java)
             startActivity(intent)
         }
-
         fetchTrendingVideos()
 
+        // Register result launcher for SelectPlaylistActivity
+        playlistLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val selectedPlaylist = result.data?.getStringExtra("playlist_name") ?: return@registerForActivityResult
+                videoToAdd?.let {
+                    PlaylistManager.addVideoToPlaylist(it, selectedPlaylist)
+                    Toast.makeText(this, "Added to \"$selectedPlaylist\"", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // Handle search from keyboard
         searchInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = searchInput.text.toString().trim()
@@ -61,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             } else false
         }
 
+        // Handle search from button
         searchButton.setOnClickListener {
             submitSearch()
         }
@@ -117,8 +133,11 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     1 -> {
-                        PlaylistManager.addVideoToPlaylist(video, playlistName)
-                        Toast.makeText(this, "Added to playlist", Toast.LENGTH_SHORT).show()
+                        videoToAdd = video
+                        val intent = Intent(this, SelectPlaylistActivity::class.java).apply {
+                            putExtra("selectForResult", true)
+                        }
+                        playlistLauncher.launch(intent)
                     }
                 }
             }
@@ -127,5 +146,5 @@ class MainActivity : AppCompatActivity() {
 
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-    }
-} // showError()
+    } // showError()
+} // MainActivity

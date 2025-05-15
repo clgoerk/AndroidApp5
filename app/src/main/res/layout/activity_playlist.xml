@@ -5,32 +5,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp"
-    android:background="@color/black">
+    android:background="@android:color/black"
+    android:padding="24dp">
 
-    <!-- Title -->
+    <!-- Page Title -->
     <TextView
-        android:id="@+id/pageTitle"
+        android:id="@+id/playlistTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/my_playlist"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        android:textColor="#FFFFFF"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="12dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- RecyclerView -->
+    <!-- Playlist RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlistRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:contentDescription="@string/view_playlist"
-        app:layout_constraintTop_toBottomOf="@id/pageTitle"
+        app:layout_constraintTop_toBottomOf="@id/playlistTitle"
         app:layout_constraintBottom_toTopOf="@id/playAllButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -40,12 +38,13 @@
         android:id="@+id/playAllButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/design_default_color_error"
         android:text="@string/play_all"
         android:textColor="@android:color/white"
+        android:backgroundTint="@color/design_default_color_error"
+        android:layout_margin="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

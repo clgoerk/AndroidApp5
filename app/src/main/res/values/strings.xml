@@ -12,4 +12,6 @@
     <string name="next">Next</string>
     <string name="search_results">Search Results</string>
     <string name="thumbnail">Thumbnail</string>
+    <string name="new_playlist_name">New playlist name</string>
+    <string name="create_playlist">Create Playlist</string>
 </resources>

@@ -4,13 +4,12 @@
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp"
+    android:padding="24dp"
     android:background="@android:color/black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="24dp">
+        android:layout_height="wrap_content">
 
         <!-- Page Title: Video Details -->
         <TextView
@@ -18,8 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/video_details"
-            android:textSize="36sp"
-            android:textStyle="bold"
+            android:textSize="28sp"
             android:textColor="@android:color/white"
             android:gravity="center"
             android:paddingBottom="12dp"

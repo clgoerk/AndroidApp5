@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.youtube.player)
     implementation(libs.youtube.player.ui)
+    implementation(libs.media)
     kapt(libs.glide.compiler)
     implementation(libs.recyclerview)
     testImplementation(libs.junit)
